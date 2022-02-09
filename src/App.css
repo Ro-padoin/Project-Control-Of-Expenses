@@ -8,3 +8,10 @@ body {
   margin: auto;
   text-align: center;
 }
+
+.container-header {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px;
+}

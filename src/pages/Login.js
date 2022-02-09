@@ -46,7 +46,7 @@ class Login extends React.Component {
     const { isDisabled, email, password } = this.state;
     return (
       <section className="container-form">
-        <fieldset>
+        <form>
           <div>
             <label htmlFor="email">
               <input
@@ -80,7 +80,7 @@ class Login extends React.Component {
           >
             Entrar
           </button>
-        </fieldset>
+        </form>
       </section>
     );
   }
