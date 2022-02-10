@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchApiExchanges } from '../../actions';
+import Select from '../Select';
+import fetchAPI from '../../services/fetchAPI';
 
-const DATA = {
+const INITIAL_STATE = {
   value: 0,
   description: '',
   currency: '',
@@ -16,13 +18,19 @@ class FormExpense extends Component {
     this.state = {
       value: 0,
       description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
+      currency: '',
+      method: '',
+      tag: '',
+      moedas: [],
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    this.fetchApi = this.fetchApi.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchApi();
   }
 
   handleChange({ target }) {
@@ -32,16 +40,24 @@ class FormExpense extends Component {
     });
   }
 
-  handleClick() {
+  handleClick(event) {
+    event.preventDefault();
     const { saveExpenses } = this.props;
-    saveExpenses(this.state);
-    this.setState({ ...DATA });
+    const { moedas, ...data } = this.state;
+    saveExpenses(data);
+    this.setState({ ...INITIAL_STATE });
+  }
+
+  async fetchApi() {
+    const resultApi = await fetchAPI();
+    const filterMoedas = Object.keys(resultApi).filter((item) => item !== 'USDT');
+    this.setState({ moedas: filterMoedas });
   }
 
   render() {
-    const { value, currency, method, tag, description } = this.state;
+    const { value, currency, method, tag, description, moedas } = this.state;
     return (
-      <form>
+      <form onSubmit={ this.handleClick }>
         <label htmlFor="valor-despesas">
           Valor:
           <input
@@ -53,39 +69,39 @@ class FormExpense extends Component {
             onChange={ this.handleChange }
           />
         </label>
-        <span>Moeda: </span>
-        <select
-          data-testid="currency-input"
+
+        <Select
+          dataTestId="currency-input"
+          id="currency-input"
           name="currency"
+          onChange={ this.handleChange }
+          options={ moedas }
+          spanText="Moeda: "
           value={ currency }
-          onChange={ this.handleChange }
-        >
-          <option>USD</option>
-        </select>
-        <span>Método de Pagamento: </span>
-        <select
-          data-testid="method-input"
+        />
+
+        <Select
+          dataTestId="method-input"
+          id="method-input"
           name="method"
+          onChange={ this.handleChange }
+          options={ ['Selecione', 'Dinheiro', 'Cartão de crédito', 'Cartão de débito'] }
+          spanText="Método de Pagamento: "
           value={ method }
-          onChange={ this.handleChange }
-        >
-          <option>Dinheiro</option>
-          <option>Cartão de crédito</option>
-          <option>Cartão de débito</option>
-        </select>
-        <span>Tag: </span>
-        <select
-          data-testid="tag-input"
+        />
+
+        <Select
+          dataTestId="tag-input"
+          id="tag-input"
           name="tag"
-          value={ tag }
           onChange={ this.handleChange }
-        >
-          <option>Alimentação</option>
-          <option>Lazer</option>
-          <option>Trabalho</option>
-          <option>Transporte</option>
-          <option>Saúde</option>
-        </select>
+          options={
+            ['Selecione', 'Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde']
+          }
+          spanText="Tag: "
+          value={ tag }
+        />
+
         <label htmlFor="descricao">
           <textarea
             data-testid="description-input"

@@ -35,7 +35,8 @@ class Login extends React.Component {
   https://www.horadecodar.com.br/2020/09/13/como-validar-email-com-javascript/
    */
 
-  handleClick() {
+  handleClick(event) {
+    event.preventDefault();
     const { history, getEmail } = this.props;
     const { email } = this.state;
     getEmail(email);

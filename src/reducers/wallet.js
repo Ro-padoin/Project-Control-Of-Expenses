@@ -16,7 +16,7 @@ const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
       expenses: [...state.expenses,
         {
           id: currentId,
-          expenses: payload.expenses,
+          ...payload.expenses,
           exchangeRates: payload.exchangeRates,
         }],
     };
