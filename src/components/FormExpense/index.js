@@ -8,7 +8,7 @@ import fetchAPI from '../../services/fetchAPI';
 const INITIAL_STATE = {
   value: 0,
   description: '',
-  currency: '',
+  currency: 'USD',
   method: '',
   tag: '',
 };
@@ -19,7 +19,7 @@ class FormExpense extends Component {
       value: 0,
       description: '',
       currency: '',
-      method: '',
+      method: 'USD',
       tag: '',
       moedas: [],
     };
@@ -103,6 +103,7 @@ class FormExpense extends Component {
         />
 
         <label htmlFor="descricao">
+          Descrição:
           <textarea
             data-testid="description-input"
             id="descricao"

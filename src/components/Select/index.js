@@ -26,11 +26,12 @@ class Select extends Component {
           id={ id }
           key={ id }
         >
-          {options.map((option, i) => (<Option
-            key={ option.concat(i) }
-            option={ option }
-            dataTestId={ option }
-          />))}
+          {options.map((option, i) => (
+            <Option
+              key={ option.concat(i) }
+              option={ option }
+              dataTestId={ option }
+            />))}
         </select>
       </>
     );

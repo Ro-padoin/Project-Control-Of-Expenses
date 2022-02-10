@@ -27,22 +27,28 @@ class TableExpense extends Component {
             value,
             currency,
             exchangeRates }) => {
-            const cambioUtilizado = Number(exchangeRates[currency].ask).toFixed(2);
-            const valueExpense = Number(value).toFixed(2);
-            const moedaConversao = (exchangeRates[currency].name);
+            const number = 16;
+            const cambioUtilizado = Number(exchangeRates[currency].ask);
+            const valueExpense = Number(value);
+            const moedaConversao = (exchangeRates[currency].name)
+              .substr(0, exchangeRates[currency].name.length - number);
             return (
               <tr key={ id }>
                 <td>{ description }</td>
                 <td>{ tag }</td>
                 <td>{ method }</td>
-                <td>{ ` ${currency} ${valueExpense}` }</td>
-                <td>{ moedaConversao }</td>
-                <td>{ cambioUtilizado }</td>
-                <td>{ cambioUtilizado * valueExpense }</td>
-                <td>Real Brasileiro</td>
+                <td>{ Number(valueExpense).toFixed(2)}</td>
+                <td>{ moedaConversao.replace('Dólar Americano', 'Dólar Comercial') }</td>
+                <td>{ Number(cambioUtilizado).toFixed(2) }</td>
+                <td>{ Number(cambioUtilizado * valueExpense).toFixed(2) }</td>
+                <td>
+                  Real
+                  {' '}
+                  {/* Brasileiro */}
+                </td>
                 <td>
                   <button type="button">Editar</button>
-                  <button type="button">Excluir</button>
+                  <button type="button" data-testid="delete-btn">Excluir</button>
                 </td>
               </tr>
             );
