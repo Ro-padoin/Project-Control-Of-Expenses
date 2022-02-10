@@ -26,10 +26,8 @@ class Header extends Component {
             Despesa Total: R$
             <span data-testid="total-field">
               { Number(totalExpenses).toFixed(2) }
-
             </span>
           </p>
-
           <p data-testid="header-currency-field">BRL</p>
         </header>
       </section>

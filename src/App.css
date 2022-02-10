@@ -10,7 +10,7 @@ body {
 }
 
 .container-header {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
   margin: 10px;
