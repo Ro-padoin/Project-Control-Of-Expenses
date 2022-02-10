@@ -1,21 +1,45 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { fetchApiExchanges } from '../../actions';
 
+const DATA = {
+  value: 0,
+  description: '',
+  currency: '',
+  method: '',
+  tag: '',
+};
 class FormExpense extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      valor: 0,
-      moeda: '',
-      pagamento: '',
-      tag: '',
-      descricao: '',
+      value: 0,
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
+  handleChange({ target }) {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleClick() {
+    const { saveExpenses } = this.props;
+    saveExpenses(this.state);
+    this.setState({ ...DATA });
+  }
+
   render() {
+    const { value, currency, method, tag, description } = this.state;
     return (
       <form>
         <label htmlFor="valor-despesas">
@@ -24,25 +48,25 @@ class FormExpense extends Component {
             type="text"
             data-testid="value-input"
             id="valor-despesas"
-            name="valor"
-            value={ valor }
+            name="value"
+            value={ value }
             onChange={ this.handleChange }
           />
         </label>
         <span>Moeda: </span>
         <select
           data-testid="currency-input"
-          name="moeda"
-          value={ moeda }
+          name="currency"
+          value={ currency }
           onChange={ this.handleChange }
         >
-          <option>BRL</option>
+          <option>USD</option>
         </select>
         <span>Método de Pagamento: </span>
         <select
           data-testid="method-input"
-          name="pagamento"
-          value={ pagamento }
+          name="method"
+          value={ method }
           onChange={ this.handleChange }
         >
           <option>Dinheiro</option>
@@ -66,8 +90,8 @@ class FormExpense extends Component {
           <textarea
             data-testid="description-input"
             id="descricao"
-            name="descricao"
-            value={ descricao }
+            name="description"
+            value={ description }
             onChange={ this.handleChange }
           />
         </label>
@@ -82,4 +106,12 @@ class FormExpense extends Component {
   }
 }
 
-export default FormExpense;
+const mapDispatchToProps = (dispatch) => ({
+  saveExpenses: (payload) => dispatch(fetchApiExchanges(payload)),
+});
+
+FormExpense.propTypes = {
+  saveExpenses: PropTypes.func,
+}.isRequired;
+
+export default connect(null, mapDispatchToProps)(FormExpense);

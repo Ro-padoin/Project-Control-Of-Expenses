@@ -1,21 +1,29 @@
-import { GET_EXPENSES, GET_EXCHANGE } from '../actions/action_type';
+import { ADD_EXPENSES, GET_EXCHANGE } from '../actions/action_type';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  currentId: -1,
 };
 
-const walletReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-  case GET_EXPENSES:
+const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
+  const currentId = state.currentId + 1;
+  switch (type) {
+  case ADD_EXPENSES:
     return {
       ...state,
-      expenses: [...state.expenses, action.payload],
+      currentId,
+      expenses: [...state.expenses,
+        {
+          id: currentId,
+          expenses: payload.expenses,
+          exchangeRates: payload.exchangeRates,
+        }],
     };
   case GET_EXCHANGE:
     return {
       ...state,
-      currencies: [...state.currencies, action.payload],
+      currencies: [...state.currencies, payload],
     };
 
   default:

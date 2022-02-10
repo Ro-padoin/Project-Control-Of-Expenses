@@ -1,4 +1,5 @@
-import { GET_EMAIL, GET_EXPENSES, GET_EXCHANGE } from './action_type';
+import { GET_EMAIL, ADD_EXPENSES, GET_EXCHANGE } from './action_type';
+import fetchAPI from '../services/fetchAPI';
 
 // preciso receber o payload = e-mail,
 export const getEmailLogin = (payload) => ({
@@ -6,10 +7,13 @@ export const getEmailLogin = (payload) => ({
   payload,
 });
 
-// preciso receber um array com todas as despesas cadastradas
-export const getExpenses = (payload) => ({
-  type: GET_EXPENSES,
-  payload,
+// preciso receber um objeto com despesas e cambio atual
+export const getExpenses = (expenses, exchangeRates) => ({
+  type: ADD_EXPENSES,
+  payload: {
+    expenses,
+    exchangeRates,
+  },
 });
 
 // preciso receber um objeto com todos os dados do cambio
@@ -17,3 +21,8 @@ export const getExchange = (payload) => ({
   type: GET_EXCHANGE,
   payload,
 });
+
+export const fetchApiExchanges = (expenses) => async (dispatch) => {
+  const exchangeRates = await fetchAPI();
+  dispatch(getExpenses(expenses, exchangeRates));
+};
