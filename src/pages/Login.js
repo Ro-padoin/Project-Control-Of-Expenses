@@ -22,16 +22,17 @@ class Login extends React.Component {
     const ruleEmail = /\S+@\S+\.\S+/;
     this.setState({
       [name]: value,
+      isDisabled: !(ruleEmail.test(email) && password.length >= minPassword),
     });
-    let isDisabled = true;
-    if (ruleEmail.test(email) && password.length >= minPassword) {
-      isDisabled = false;
-    }
-    this.setState({
-      isDisabled,
-    });
+    // let isDisabled = true;
+    // if (ruleEmail.test(email) && password.length >= minPassword) {
+    //   isDisabled = false;
+    // }
+    // this.setState({
+    //   isDisabled,
+    // });
   }
-  /* Verificacao de e-mail baseada no codigo do site:
+  /* Verificacao de e-mail(regex) baseada no codigo do site:
   https://www.horadecodar.com.br/2020/09/13/como-validar-email-com-javascript/
    */
 

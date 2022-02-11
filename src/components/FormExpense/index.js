@@ -17,10 +17,10 @@ class FormExpense extends Component {
     super();
     this.state = {
       value: 0,
-      description: '',
       currency: '',
       method: 'USD',
       tag: '',
+      description: '',
       moedas: [],
     };
 

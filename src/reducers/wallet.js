@@ -1,4 +1,4 @@
-import { ADD_EXPENSES, GET_EXCHANGE } from '../actions/action_type';
+import { ADD_EXPENSES, DELETE_EXPENSE } from '../actions/action_type';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -8,6 +8,7 @@ const INITIAL_STATE = {
 
 const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
   const currentId = state.currentId + 1;
+  const newExpensesList = state.expenses.filter((expense) => expense.id !== payload);
   switch (type) {
   case ADD_EXPENSES:
     return {
@@ -20,10 +21,15 @@ const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
           exchangeRates: payload.exchangeRates,
         }],
     };
-  case GET_EXCHANGE:
+  // case ADD_CURRENCIES:
+  //   return {
+  //     ...state,
+  //     currencies: [...payload],
+  //   };
+  case DELETE_EXPENSE:
     return {
       ...state,
-      currencies: [...state.currencies, payload],
+      expenses: [...newExpensesList],
     };
 
   default:
