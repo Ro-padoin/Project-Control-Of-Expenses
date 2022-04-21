@@ -8,7 +8,7 @@ import fetchAPI from '../../services/fetchAPI';
 const INITIAL_STATE = {
   value: 0,
   description: '',
-  currency: 'USD',
+  currency: '',
   method: '',
   tag: '',
 };
@@ -18,7 +18,7 @@ class FormExpense extends Component {
     this.state = {
       value: 0,
       currency: '',
-      method: 'USD',
+      method: '',
       tag: '',
       description: '',
       moedas: [],
@@ -41,7 +41,10 @@ class FormExpense extends Component {
   }
 
   handleClick(event) {
-    event.preventDefault();
+    const { currency, method, tag } = this.state;
+    if(currency === '' || method === '' || tag === '') {
+      return global.alert('Por favor, preencha todos os campos');
+    }
     const { saveExpenses } = this.props;
     const { moedas, ...data } = this.state;
     saveExpenses(data);
@@ -85,7 +88,7 @@ class FormExpense extends Component {
           id="method-input"
           name="method"
           onChange={ this.handleChange }
-          options={ ['Selecione', 'Dinheiro', 'Cartão de crédito', 'Cartão de débito'] }
+          options={ ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'] }
           spanText="Método de Pagamento: "
           value={ method }
         />
@@ -96,7 +99,7 @@ class FormExpense extends Component {
           name="tag"
           onChange={ this.handleChange }
           options={
-            ['Selecione', 'Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde']
+            ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde']
           }
           spanText="Tag: "
           value={ tag }

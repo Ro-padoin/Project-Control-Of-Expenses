@@ -26,6 +26,7 @@ class Select extends Component {
           id={ id }
           key={ id }
         >
+          <option value="">Selecione</option>
           {options.map((option, i) => (
             <Option
               key={ option.concat(i) }
