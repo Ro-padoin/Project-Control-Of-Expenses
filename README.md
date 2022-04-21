@@ -1,4 +1,4 @@
-<h1> Projeto Control Of Expenses</h1>
+<h1> Projeto Control Of Expenses || Controle de Despesas </h1>
 
 <br/>
 
