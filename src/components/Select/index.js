@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Option from '../Option';
+import Option from '../Option/index ';
+
 
 class Select extends Component {
   render() {
