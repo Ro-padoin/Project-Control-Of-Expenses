@@ -1,7 +1,6 @@
 import React from 'react';
 import { deleteExpense } from '../../actions';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Th from '../Th';
 
 function TableExpense () {

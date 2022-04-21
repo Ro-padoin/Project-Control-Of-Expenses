@@ -1,137 +1,111 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { fetchApiExchanges } from '../../actions';
 import Select from '../Select';
 import fetchAPI from '../../services/fetchAPI';
+import { useDispatch } from 'react-redux';
 
 const INITIAL_STATE = {
-  value: 0,
-  description: '',
   currency: '',
+  description: '',
   method: '',
   tag: '',
+  value: 0,
 };
-class FormExpense extends Component {
-  constructor() {
-    super();
-    this.state = {
-      value: 0,
-      currency: '',
-      method: '',
-      tag: '',
-      description: '',
-      moedas: [],
-    };
 
-    this.fetchApi = this.fetchApi.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
+function FormExpense () {
+  const [localState, setLocalState] = useState(INITIAL_STATE);
+  const [moedas, setMoedas] = useState([]);
 
-  componentDidMount() {
-    this.fetchApi();
-  }
+  const dispatch = useDispatch();
 
-  handleChange({ target }) {
+  useEffect(() => {
+    fetchApi()
+  }, []); 
+
+  const handleChange = ({ target }) => {
     const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
+    setLocalState(prevState => ({ ...prevState, [name]: value }));
   }
 
-  handleClick(event) {
-    const { currency, method, tag } = this.state;
+  const handleClick = () => {
+    const { currency, method, tag } = localState;
     if(currency === '' || method === '' || tag === '') {
       return global.alert('Por favor, preencha todos os campos');
     }
-    const { saveExpenses } = this.props;
-    const { moedas, ...data } = this.state;
-    saveExpenses(data);
-    this.setState({ ...INITIAL_STATE });
+    dispatch(fetchApiExchanges(localState));
+    setLocalState({ ...INITIAL_STATE });
   }
 
-  async fetchApi() {
+  const fetchApi = async() => {
     const resultApi = await fetchAPI();
     const filterMoedas = Object.keys(resultApi).filter((item) => item !== 'USDT');
-    this.setState({ moedas: filterMoedas });
+    setMoedas([...filterMoedas]);
   }
 
-  render() {
-    const { value, currency, method, tag, description, moedas } = this.state;
     return (
-      <form onSubmit={ this.handleClick }>
+      <form>
         <label htmlFor="valor-despesas">
           Valor:
           <input
             type="text"
-            data-testid="value-input"
             id="valor-despesas"
             name="value"
-            value={ value }
-            onChange={ this.handleChange }
+            value={ localState.value }
+            onChange={ handleChange }
           />
         </label>
 
         <Select
-          dataTestId="currency-input"
           id="currency-input"
           name="currency"
-          onChange={ this.handleChange }
+          onChange={ handleChange }
           options={ moedas }
           spanText="Moeda: "
-          value={ currency }
+          value={ localState.currency }
         />
 
         <Select
-          dataTestId="method-input"
           id="method-input"
           name="method"
-          onChange={ this.handleChange }
+          onChange={ handleChange }
           options={ ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'] }
           spanText="Método de Pagamento: "
-          value={ method }
+          value={ localState.method }
         />
 
         <Select
-          dataTestId="tag-input"
           id="tag-input"
           name="tag"
-          onChange={ this.handleChange }
+          onChange={ handleChange }
           options={
             ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde']
           }
           spanText="Tag: "
-          value={ tag }
+          value={ localState.tag }
         />
 
         <label htmlFor="descricao">
           Descrição:
           <textarea
-            data-testid="description-input"
             id="descricao"
             name="description"
-            value={ description }
-            onChange={ this.handleChange }
+            value={ localState.description }
+            onChange={ handleChange }
           />
         </label>
         <button
           type="button"
-          onClick={ this.handleClick }
+          onClick={ handleClick }
         >
           Adicionar despesa
         </button>
       </form>
     );
   }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  saveExpenses: (payload) => dispatch(fetchApiExchanges(payload)),
-});
 
 FormExpense.propTypes = {
   saveExpenses: PropTypes.func,
 }.isRequired;
 
-export default connect(null, mapDispatchToProps)(FormExpense);
+export default FormExpense;
