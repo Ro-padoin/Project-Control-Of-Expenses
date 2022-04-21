@@ -1,19 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Option from '../Option/index ';
 
-
-class Select extends Component {
-  render() {
-    const { spanText,
-      name,
-      dataTestId,
-      id,
-      value,
-      onChange:
-      handleChange,
-      options } = this.props;
-
+function Select (props) {
+  const {
+    spanText,
+    name,
+    id,
+    value,
+    onChange: handleChange,
+    options } = props;   
+    
     return (
       <>
         <label htmlFor={ id }>
@@ -23,24 +20,21 @@ class Select extends Component {
           name={ name }
           value={ value }
           onChange={ handleChange }
-          data-testid={ dataTestId }
           id={ id }
           key={ id }
         >
-          <option value="">Selecione</option>
+          <option value=''>Selecione</option>
           {options.map((option, i) => (
             <Option
               key={ option.concat(i) }
               option={ option }
-              dataTestId={ option }
             />))}
         </select>
       </>
     );
   }
-}
+
 Select.propTypes = {
-  dataTestId: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
   value: PropTypes.string,
