@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../components/Header';
 import FormExpense from '../components/FormExpense';
+import Header from '../components/Header';
 import TableExpense from '../components/TableExpense';
 
 function Wallet () {
