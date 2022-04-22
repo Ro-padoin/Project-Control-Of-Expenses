@@ -14,6 +14,7 @@ const INITIAL_STATE = {
 function Login() {
   const [stateLocal, setStateLocal] = useState(INITIAL_STATE);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const validationLoginAndSetStateDisabled = () => {
     const MIN_PASSWORD = 5;
@@ -23,52 +24,45 @@ function Login() {
     setStateLocal(prevState => (
       { ...prevState, isDisabled }));
   }
-  /* Verificacao de e-mail(regex) baseada no codigo do site:
-  https://www.horadecodar.com.br/2020/09/13/como-validar-email-com-javascript/
-   */
-
-  const history = useHistory();
-
-  const handleClick = () => {
-    dispatch(getEmailLogin(stateLocal.email));
-    history.push('/carteira');
-  }
 
   return (
     <section className="container-form">
       <form>
         <div>
           <Input
-              id="email"
-              name="email"
-              onChange={({ target: { value } }) => {
-                setStateLocal(prevState => ({ ...prevState, email: value }))
-                validationLoginAndSetStateDisabled();
-              }}
-              placeholder="Digite seu e-mail"
-              textLabel=""
-              type="email"
-              value={stateLocal.email}
-            />
+            id="email"
+            name="email"
+            onChange={({ target: { value } }) => {
+              setStateLocal(prevState => ({ ...prevState, email: value }))
+              validationLoginAndSetStateDisabled();
+            }}
+            placeholder="Digite seu e-mail"
+            textLabel=""
+            type="email"
+            value={stateLocal.email}
+          />
         </div>
         <div>
-              <Input
-              id="password"
-              name="password"
-              onChange={({ target: { value } }) => {
-                setStateLocal(prevState => ({ ...prevState, password: value }))
-                validationLoginAndSetStateDisabled();
-              }}
-              placeholder="Digite sua senha"
-              textLabel=""
-              type="password"
-              value={stateLocal.password}
-            />
+          <Input
+            id="password"
+            name="password"
+            onChange={({ target: { value } }) => {
+              setStateLocal(prevState => ({ ...prevState, password: value }))
+              validationLoginAndSetStateDisabled();
+            }}
+            placeholder="Digite sua senha"
+            textLabel=""
+            type="password"
+            value={stateLocal.password}
+          />
         </div>
         <Button
           type="button"
           disabled={stateLocal.isDisabled}
-          onClick={handleClick}
+          onClick={() => {
+            dispatch(getEmailLogin(stateLocal.email));
+            history.push('/carteira');
+          }}
         >
           Entrar
         </Button>
@@ -78,3 +72,7 @@ function Login() {
 }
 
 export default Login;
+
+/* Verificacao de e-mail(regex) baseada no codigo do site:
+https://www.horadecodar.com.br/2020/09/13/como-validar-email-com-javascript/
+ */

@@ -2,24 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Option from '../Option/index ';
 
-function Select (props) {
-  const {
-    spanText,
-    name,
-    id,
-    value,
-    onChange: handleChange,
-    options } = props;   
-    
+function Select ({ id, labelText, name, onChange, options, value }) {
     return (
       <>
         <label htmlFor={ id }>
-          { spanText }
+          { labelText }
         </label>
         <select
           name={ name }
           value={ value }
-          onChange={ handleChange }
+          onChange={ onChange }
           id={ id }
           key={ id }
         >
@@ -36,11 +28,11 @@ function Select (props) {
 
 Select.propTypes = {
   id: PropTypes.string,
+  labelText: PropTypes.string,
   name: PropTypes.string,
-  value: PropTypes.string,
   onChange: PropTypes.func,
-  spanText: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.string),
+  value: PropTypes.string,
 }.isRequired;
 
 export default Select;

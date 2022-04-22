@@ -12,21 +12,21 @@ function Header () {
     }, 0);
 
     return (
-      <section>
-        <header className="container-header">
+      <section class="header-container">
+        <header>
           <p>
             Email:
-            <span data-testid="email-field">
+            <span>
               { email }
             </span>
           </p>
           <p>
             Despesa Total: R$
-            <span data-testid="total-field">
+            <span>
               { Number(totalExpenses).toFixed(2) }
             </span>
           </p>
-          <p data-testid="header-currency-field">BRL</p>
+          <p>BRL</p>
         </header>
       </section>
     );

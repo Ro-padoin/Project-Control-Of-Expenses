@@ -9,7 +9,6 @@ function Option({option}) {
 
 Option.propTypes = {
   option: PropTypes.string,
-  dataTestId: PropTypes.string,
 }.isRequired;
 
 export default Option;

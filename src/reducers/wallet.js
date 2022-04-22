@@ -9,26 +9,26 @@ const INITIAL_STATE = {
 const walletReducer = (state = INITIAL_STATE, { type, payload }) => {
   const currentId = state.currentId + 1;
   switch (type) {
-  case ADD_EXPENSES:
-    return {
-      ...state,
-      currentId,
-      expenses: [...state.expenses,
+    case ADD_EXPENSES:
+      return {
+        ...state,
+        currentId,
+        expenses: [...state.expenses,
         {
           id: currentId,
           ...payload.expenses,
           exchangeRates: payload.exchangeRates,
         }],
-    };
-  case DELETE_EXPENSE:
-    const newExpensesList = state.expenses.filter((expense) => expense.id !== payload);
-    return {
-      ...state,
-      expenses: [...newExpensesList],
-    };
+      };
+    case DELETE_EXPENSE:
+      const newExpensesList = state.expenses.filter((expense) => expense.id !== payload);
+      return {
+        ...state,
+        expenses: [...newExpensesList],
+      };
 
-  default:
-    return state;
+    default:
+      return state;
   }
 };
 
