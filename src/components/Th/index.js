@@ -5,7 +5,9 @@ const TITLE_TABLE = ['Descrição', 'Tag', 'Método de Pagamento', 'Valor', 'Moe
 function Th() {
 
     return (
-        TITLE_TABLE.map((title, i) => <th key={i}>{title}</th>)
+        <tr>
+            {TITLE_TABLE.map((title, i) => <th key={`${i} 0`}>{title}</th>)}
+        </tr>
     )
 }
 
