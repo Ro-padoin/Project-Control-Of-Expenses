@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-class Header extends Component {
-  render() {
-    const { email, expenses } = this.props;
+function Header () {
+  const email = useSelector(({ user })=> user.email);
+  const expenses = useSelector(({wallet}) => wallet.expenses);
 
     const totalExpenses = expenses.reduce((acc, { currency, value, exchangeRates }) => {
       const valueExpense = Number(value);
@@ -32,16 +31,5 @@ class Header extends Component {
       </section>
     );
   }
-}
 
-const mapStateToProps = ({ user, wallet }) => ({
-  email: user.email,
-  expenses: wallet.expenses,
-});
-
-Header.propTypes = {
-  email: PropTypes.string,
-  value: PropTypes.string,
-}.isRequired;
-
-export default connect(mapStateToProps)(Header);
+export default Header;

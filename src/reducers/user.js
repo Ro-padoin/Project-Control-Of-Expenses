@@ -4,28 +4,16 @@ const INITIAL_STATE = {
   email: '',
 };
 
-const userReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+const userReducer = (state = INITIAL_STATE, {type, payload}) => {
+  switch (type) {
   case GET_EMAIL:
     return {
       ...state,
-      email: action.payload,
+      email: payload,
     };
   default:
     return state;
   }
 };
-
-// const userReducer = (state = INITIAL_STATE, {type, payload}) => {
-  // switch (type) {
-  // case GET_EMAIL:
-    // return {
-      // ...state,
-      // email: payload,
-    // };
-  // default:
-    // return state;
-  // }
-// };
 
 export default userReducer;

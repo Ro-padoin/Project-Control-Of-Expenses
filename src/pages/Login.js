@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getEmailLogin } from '../actions';
+import { store, persistor } from '../store';
 
 class Login extends React.Component {
   constructor() {
@@ -46,6 +47,7 @@ class Login extends React.Component {
 
   render() {
     const { isDisabled, email, password } = this.state;
+    console.log(store, persistor);
     return (
       <section className="container-form">
         <form>

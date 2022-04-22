@@ -22,18 +22,9 @@ export const deleteExpense = (payload) => ({
   payload,
 });
 
-// export const getCurrencies = (payload) => ({
-//   type: ADD_CURRENCIES,
-//   payload,
-// });
 
 export const fetchApiExchanges = (expenses) => async (dispatch) => {
   const exchangeRates = await fetchAPI();
   dispatch(getExpenses(expenses, exchangeRates));
 };
 
-// export const fetchCurrencies = () => async (dispatch) => {
-//   const resultApi = await fetchAPI();
-//   const filterMoedas = Object.keys(resultApi).filter((item) => item !== 'USDT');
-//   dispatch(getCurrencies(filterMoedas));
-// };

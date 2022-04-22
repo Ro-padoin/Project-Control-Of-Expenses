@@ -23,16 +23,11 @@ function FormExpense () {
     fetchApi()
   }, []); 
 
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setLocalState(prevState => ({ ...prevState, [name]: value }));
-  }
+  const handleChange = ({ target:  { name, value }}) => setLocalState(prevState => ({ ...prevState, [name]: value }));
 
   const handleClick = () => {
     const { currency, method, tag } = localState;
-    if(currency === '' || method === '' || tag === '') {
-      return global.alert('Por favor, preencha todos os campos');
-    }
+    if(currency === '' || method === '' || tag === '') return global.alert('Por favor, preencha todos os campos');
     dispatch(fetchApiExchanges(localState));
     setLocalState({ ...INITIAL_STATE });
   }
