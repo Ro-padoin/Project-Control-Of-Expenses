@@ -3,8 +3,7 @@ import Header from '../components/Header';
 import FormExpense from '../components/FormExpense';
 import TableExpense from '../components/TableExpense';
 
-class Wallet extends React.Component {
-  render() {
+function Wallet () {
     return (
       <section>
         <Header />
@@ -13,6 +12,5 @@ class Wallet extends React.Component {
       </section>
     );
   }
-}
 
 export default Wallet;
