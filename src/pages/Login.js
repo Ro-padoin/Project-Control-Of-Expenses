@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getEmailLogin } from '../actions';
 
@@ -9,7 +10,8 @@ const INITIAL_STATE = {
 };
 
 function Login() {
-  const [ stateLocal, setStateLocal] = useState(INITIAL_STATE)
+  const [ stateLocal, setStateLocal] = useState(INITIAL_STATE);
+  const dispatch = useDispatch();
  
   const validationLogin = () => {
     const MIN_PASSWORD = 5;
@@ -26,7 +28,7 @@ function Login() {
   const history = useHistory();
 
   const handleClick = () => {
-    getEmailLogin(stateLocal.email);
+    dispatch(getEmailLogin(stateLocal.email));
     history.push('/carteira');
   }
 
