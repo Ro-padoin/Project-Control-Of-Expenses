@@ -64,7 +64,6 @@ Estilização com CSS: Em andamento.
 88.89% nos requisitos Totais.
 
 
-
 ## Refatoração
 
 * Branch main: encontra-se o código desenvolvido e entregue para fins de avaliação. Redux em React utilizando Class Component. Status: Finalizado.
