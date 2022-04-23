@@ -83,5 +83,5 @@ Estilização com CSS: Em andamento.
 
 ## Desempenho
 
-100% nos requisitos Obrigatórios.
+100% nos requisitos Obrigatórios. <br/>
 88.89% nos requisitos Totais.
