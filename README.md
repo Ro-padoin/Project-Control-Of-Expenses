@@ -45,9 +45,32 @@ Todo o desenvolvimento se encontra na raiz deste projeto, na pasta "src" e "App.
 
 <br/>
 
+## Execução da Aplicação
+
+Para executar a aplicação no navegador, você precisa:
+
+- clonar o repositório para maquina local, utilizando o comando no terminal:
+  git clone git@github.com:Ro-padoin/Project-Control-Of-Expenses.git
+
+- npm install;
+
+- npm start.
+
+Observação: Node versão 16.
+
+<br/>
+
+## Branchs
+
+- Branch main: encontra-se o código desenvolvido e entregue para fins de avaliação. Redux em React utilizando Class Component. Status: Finalizado.
+
+- Branch refactor-funcional-component: como o próprio nome sugere, encontra-se o código refatorado para Functional Component utilizando Hooks para manipular e ler o estado do Redux. Status: Em Andamento.
+
+<br/>
+
 ## Colaboradores
 
-Projeto realizado individualmente.
+Projeto realizado e refatorado individualmente.
 
 <br/>
 
@@ -62,10 +85,3 @@ Estilização com CSS: Em andamento.
 
 100% nos requisitos Obrigatórios.
 88.89% nos requisitos Totais.
-
-
-## Refatoração
-
-* Branch Main: encontra-se o código desenvolvido e entregue para fins de avaliação. Redux em React utilizando Class Component. Status: Finalizado.
-
-* Branch Componente-funcional-e-hooks: como o próprio nome sugere, encontra-se o código refatorado para Functional Component utilizando Hooks para manipular e ler o estado do Redux. Status: Em Andamento.
