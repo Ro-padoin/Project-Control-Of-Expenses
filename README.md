@@ -62,3 +62,11 @@ Estilização com CSS: Em andamento.
 
 100% nos requisitos Obrigatórios.
 88.89% nos requisitos Totais.
+
+
+
+## Refatoração
+
+* Branch main: encontra-se o código desenvolvido e entregue para fins de avaliação. Redux em React utilizando Class Component. Status: Finalizado.
+
+* Branch Componente-funcional-e-hooks: como o próprio nome sugere, encontra-se o código refatorado para Functional Component utilizando Hooks para manipular e ler o estado do Redux. Status: Em Andamento.
